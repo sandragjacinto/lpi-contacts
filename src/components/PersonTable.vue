@@ -25,10 +25,12 @@
 
 export default {
   props: {
-    personList: {
-      type: Array,
-     default: []
-    }
+    peopleList: Array
   },
+  methods: {
+    showModal(person) {
+      this.$emit('show', person);
+    },
+  }
 };
 </script>

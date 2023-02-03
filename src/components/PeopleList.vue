@@ -2,27 +2,7 @@
   <MyModal v-if="editingPerson" @close="closeModal" :person="editingPerson"/>
   <div  v-else>
     <h1 class="title">List all persons</h1>
-    <table  class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Age</th>
-          <th>Email</th>
-          <th>City</th>
-          <th>Country</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="person in peopleList" :key="person.id" @click="showModal(person)">
-          <td>{{ person.firstname }}</td>
-          <td>{{ person.lastname }}</td>
-          <td>{{ person.email }}</td>
-          <td>{{ person.address.city }}</td>
-          <td>{{ person.address.country }}</td>
-        </tr>
-      </tbody>
-    </table>
-    
+   <PersonTable :peopleList="peopleList" @show="showModal"/>
   </div>
 </template>
 
@@ -30,10 +10,12 @@
 <script >
 import { mapState } from 'vuex';
 import MyModal from './MyModal.vue';
+import PersonTable from './PersonTable.vue';
 
 export default {
   components: {
-    MyModal
+    MyModal,
+    PersonTable
   },
   computed: {
     ...mapState({
@@ -42,7 +24,7 @@ export default {
   },
   data() {
     return {
-      editingPerson: null
+      editingPerson: null,
     };
   },
   methods: {
